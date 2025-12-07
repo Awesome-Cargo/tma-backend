@@ -1,0 +1,1 @@
+{"version":3,"file":"department.controller.d.ts","sourceRoot":"","sources":["../../../src/core/department/department.controller.ts"],"names":[],"mappings":"AAAA,OAAO,KAAK,EAAE,OAAO,EAAE,QAAQ,EAAE,MAAM,SAAS,CAAC;AACjD,OAAO,EAAE,iBAAiB,EAAE,MAAM,yBAAyB,CAAC;AAE5D,qBAAa,oBAAoB;IAC/B,iBAAiB,oBAAC;;IAKZ,cAAc,CAAC,IAAI,EAAE,OAAO,EAAE,GAAG,EAAE,QAAQ;CAQlD"}
