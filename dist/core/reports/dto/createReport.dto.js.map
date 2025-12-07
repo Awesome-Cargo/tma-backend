@@ -1,0 +1,1 @@
+{"version":3,"file":"createReport.dto.js","sourceRoot":"","sources":["../../../../src/core/reports/dto/createReport.dto.ts"],"names":[],"mappings":"AAAA,MAAM,CAAC,MAAM,eAAe,GAAG,CAAC,IAAS,EAAE,EAAE;IAC3C,OAAO;QACL,IAAI,EAAE,IAAI,CAAC,IAAI;QACf,WAAW,EAAE,IAAI,CAAC,WAAW;QAC7B,MAAM,EAAE,IAAI,CAAC,MAAM;KACpB,CAAC;AACJ,CAAC,CAAC"}

@@ -1,0 +1,38 @@
+import mongoose from "mongoose";
+const AwbReportDataSchema = new mongoose.Schema({
+    _id: { type: mongoose.Schema.Types.ObjectId, auto: true },
+    prefijo: { type: String, required: true },
+    awb: { type: String, required: true },
+    carrier: { type: String, required: true },
+    orig: { type: String, required: true },
+    dest: { type: String, required: true },
+    codigo_agente: { type: String, required: true },
+    pieces: { type: Number, required: true },
+    weight: { type: Number, required: true },
+    gross_weight: { type: Number, required: true },
+    volume: { type: Number, required: true },
+    rate: { type: Number, required: true },
+    flete: { type: Number, required: true },
+    subtotal: { type: Number, required: true },
+    iva: { type: Number, required: true },
+    total: { type: Number, required: true },
+    tipo_pago: { type: String, required: true },
+    dim_pieces: { type: Number, required: true },
+    dim_weight: { type: Number, required: true },
+    dim_length: { type: Number, required: true },
+    dim_width: { type: Number, required: true },
+    dim_height: { type: Number, required: true },
+    dim_volume: { type: Number, required: true },
+    descripcion: { type: String, required: true },
+    codigo_cliente: { type: String, required: true },
+    consignee: { type: String, required: true },
+    currency: { type: String, required: true },
+    product: { type: String, required: true },
+    price_class: { type: String, required: true },
+    fecha_creacion: { type: Date, required: true },
+    charges: { type: String, required: true },
+}, {
+    timestamps: true,
+});
+export const AwbReportData = mongoose.model("AwbReportData", AwbReportDataSchema);
+//# sourceMappingURL=AwbReportData.js.map
