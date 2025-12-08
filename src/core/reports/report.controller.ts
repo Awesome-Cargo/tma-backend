@@ -3,6 +3,7 @@ import { ReportService } from "./report.service.js";
 import { CreateReportDto } from "./dto/createReport.dto.js";
 import { verifyToken } from "../../utils/jwt-utils.js";
 import { UserService } from "../user/user.service.js";
+import { validateHeaders } from "../../utils/validateHeaders.js";
 
 export class ReportController {
   reportService;
@@ -105,6 +106,29 @@ export class ReportController {
         return res.status(404).json({ message: "User not found" });
       }
       res.status(200).json({ reports: user.reports });
+    } catch (error) {
+      res.status(400).json({ message: (error as Error).message });
+    }
+  }
+
+  async getAllData(req: Request, res: Response) {
+    const clientName = req.headers["x-client-name"] as string | undefined;
+    const apiKey = req.headers["x-api-key"] as string | undefined;
+
+    if (!clientName || !apiKey) {
+      return res
+        .status(400)
+        .json({ message: "Client name and API key are required" });
+    }
+
+    const headersAreValid = validateHeaders(clientName, apiKey);
+    if (!headersAreValid) {
+      return res.status(401).json({ message: "Invalid client credentials" });
+    }
+
+    try {
+      const data = await this.reportService.getAllData();
+      res.status(200).json({ data });
     } catch (error) {
       res.status(400).json({ message: (error as Error).message });
     }

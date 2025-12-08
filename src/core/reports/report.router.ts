@@ -41,4 +41,6 @@ app.get(
   reportController.getUserReports.bind(reportController)
 );
 
+app.get("/all-data", reportController.getAllData.bind(reportController));
+
 export { app as ReportRouter };

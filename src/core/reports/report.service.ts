@@ -2,6 +2,8 @@ import mongoose, { isValidObjectId } from "mongoose";
 import {
   AwbReportData,
   FsuReportData,
+  IAwbReportData,
+  IFsuReportData,
   ReportData,
   SheetData,
   type ISheetData,
@@ -159,5 +161,31 @@ export class ReportService {
     return schemaPaths.filter(
       (f) => !["_id", "__v", "createdAt", "updatedAt"].includes(f)
     );
+  }
+
+  getAllData(
+    startDate?: string,
+    endDate?: string
+  ): Promise<{
+    awbReportData: IAwbReportData[];
+    fsuReportData: IFsuReportData[];
+  }> {
+    const query: Record<string, any> = {};
+    if (startDate || endDate) {
+      query.createdAt = {};
+      if (startDate) {
+        query.createdAt.$gte = new Date(startDate);
+      }
+      if (endDate) {
+        query.createdAt.$lte = new Date(endDate);
+      }
+    }
+    return Promise.all([
+      AwbReportData.find(query).lean(),
+      FsuReportData.find(query).lean(),
+    ]).then(([awbReportData, fsuReportData]) => ({
+      awbReportData,
+      fsuReportData,
+    }));
   }
 }
