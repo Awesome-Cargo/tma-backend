@@ -163,13 +163,7 @@ export class ReportService {
     );
   }
 
-  getAllData(
-    startDate?: string,
-    endDate?: string
-  ): Promise<{
-    awbReportData: IAwbReportData[];
-    fsuReportData: IFsuReportData[];
-  }> {
+  getAllData(startDate?: string, endDate?: string): Promise<IAwbReportData[]> {
     const query: Record<string, any> = {};
     if (startDate || endDate) {
       query.createdAt = {};
@@ -180,12 +174,10 @@ export class ReportService {
         query.createdAt.$lte = new Date(endDate);
       }
     }
-    return Promise.all([
-      AwbReportData.find(query).lean(),
-      FsuReportData.find(query).lean(),
-    ]).then(([awbReportData, fsuReportData]) => ({
-      awbReportData,
-      fsuReportData,
-    }));
+    return AwbReportData.find(query)
+      .lean()
+      .then((awbReportData) => {
+        return awbReportData;
+      });
   }
 }
