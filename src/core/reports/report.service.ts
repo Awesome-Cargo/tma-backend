@@ -3,7 +3,6 @@ import {
   AwbReportData,
   FsuReportData,
   IAwbReportData,
-  IFsuReportData,
   ReportData,
   SheetData,
   type ISheetData,
