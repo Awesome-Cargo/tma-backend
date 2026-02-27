@@ -32,13 +32,11 @@ export const reportExcelDto = (rows: Row[]): IReportExcel[] => {
       iva: parseFloat(getCellValue(row, 17) || "0"),
       total: parseFloat(getCellValue(row, 18) || "0"),
       codigo_cliente: getCellValue(row, 19),
-      currency: getCellValue(row, 20),
+      currency: getCellValue(row, 20) || "",
       price_class: getCellValue(row, 21),
       shc: getCellValue(row, 22),
       charge_code: getCellValue(row, 23),
-      tipo_pago: getCellValue(row, 24),
-      descripcion: getCellValue(row, 25),
-      create_oper: getCellValue(row, 26),
+      create_oper: getCellValue(row, 24),
     };
   });
 };

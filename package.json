@@ -9,7 +9,9 @@
     "dev": "clear && tsx watch src/index.ts",
     "seed": "clear && tsx watch src/scripts/seed.script.ts",
     "seed-awb": "clear && tsx watch src/scripts/get-report-data.script.ts",
-    "seed-fsu": "clear && tsx watch src/scripts/get-fsu-data.script.ts"
+    "seed-fsu": "clear && tsx watch src/scripts/get-fsu-data.script.ts",
+    "scraper:start": "npx ts-node src/scraper/scraper.ts",
+    "scraper:test": "clear && npm run build && npx ts-node dist/scraper/getAllData.js"
   },
   "keywords": [],
   "author": "",
@@ -28,7 +30,7 @@
     "@types/node": "^24.3.0",
     "@types/node-cron": "^3.0.11",
     "@types/nodemailer": "^7.0.1",
-    "@types/selenium-webdriver": "^4.1.28",
+    "@types/selenium-webdriver": "^4.35.5",
     "tsx": "^4.20.5",
     "typescript": "^5.9.2"
   },
@@ -47,7 +49,8 @@
     "morgan": "^1.10.1",
     "node-cron": "^4.2.1",
     "nodemailer": "^7.0.6",
-    "selenium-webdriver": "^4.35.0",
+    "puppeteer": "^24.35.0",
+    "selenium-webdriver": "^4.39.0",
     "ts-node": "^10.9.2"
   }
 }

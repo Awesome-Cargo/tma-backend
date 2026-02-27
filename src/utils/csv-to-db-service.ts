@@ -9,7 +9,7 @@ const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
 export const getAwbReportData = async ({ fileName }: { fileName: string }) => {
-  const filePath = path.resolve(__dirname, `../downloads/${fileName}.csv`);
+  const filePath = path.resolve(__dirname, `../../downloads/${fileName}`);
 
   const workbook = new Exceljs.Workbook();
   const worksheet = await workbook.csv.readFile(filePath);
@@ -31,7 +31,7 @@ export const getAwbReportData = async ({ fileName }: { fileName: string }) => {
 };
 
 export const getFsuReportData = async ({ fileName }: { fileName: string }) => {
-  const filePath = path.resolve(__dirname, `../downloads/${fileName}.csv`);
+  const filePath = path.resolve(__dirname, `../../downloads/${fileName}`);
 
   const workbook = new Exceljs.Workbook();
   const worksheet = await workbook.csv.readFile(filePath);

@@ -33,7 +33,7 @@ export class ReportService {
 
   async updateReport(
     id: string,
-    data: { reportName?: string; description?: string; sheets: ISheetData[] }
+    data: { reportName?: string; description?: string; sheets: ISheetData[] },
   ) {
     try {
       const report = await ReportData.findById(id);
@@ -54,7 +54,7 @@ export class ReportService {
        *   1. ELIMINAR SHEETS QUE YA NO VIENEN
        *  ---------------------------------- */
       const sheetsToRemove = currentSheetIds.filter(
-        (id) => !incomingSheetIds.includes(id)
+        (id) => !incomingSheetIds.includes(id),
       );
 
       for (const sheetId of sheetsToRemove) {
@@ -111,7 +111,7 @@ export class ReportService {
           acc[field] = 1;
           return acc;
         },
-        { _id: 0 }
+        { _id: 0 },
       );
 
       const query = sheetData.filterCriteria || {};
@@ -158,7 +158,7 @@ export class ReportService {
         throw new Error("Unknown collection name");
     }
     return schemaPaths.filter(
-      (f) => !["_id", "__v", "createdAt", "updatedAt"].includes(f)
+      (f) => !["_id", "__v", "createdAt", "updatedAt"].includes(f),
     );
   }
 
@@ -174,6 +174,7 @@ export class ReportService {
       }
     }
     return AwbReportData.find(query)
+      .select("-_id -__v -updatedAt -createdAt")
       .lean()
       .then((awbReportData) => {
         return awbReportData;

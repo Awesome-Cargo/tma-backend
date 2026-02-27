@@ -19,7 +19,7 @@ export interface IAwbReportData {
   iva: number;
   total?: number;
   tipo_pago?: string;
-  descripcion: string;
+  descripcion?: string;
   codigo_cliente?: string;
   currency: string;
   price_class?: string;
@@ -29,41 +29,41 @@ export interface IAwbReportData {
   create_oper: string;
 }
 
-const AwbReportDataSchema = new mongoose.Schema<IAwbReportData>(
+const awbReportDataSchemaDefinition: mongoose.SchemaDefinition<mongoose.AnyObject> =
   {
     _id: { type: mongoose.Schema.Types.ObjectId, auto: true },
-    prefijo: { type: String, required: true },
-    awb: { type: String, required: true },
-    carrier: { type: String, required: true },
-    orig: { type: String, required: true },
-    dest: { type: String, required: true },
-    codigo_agente: { type: String, required: true },
-    nombre_agente: { type: String, required: true },
-    pieces: { type: Number, required: true },
-    weight: { type: Number, required: true },
-    gross_weight: { type: Number, required: true },
-    volume: { type: Number, required: true },
+    prefijo: { type: String },
+    awb: { type: String },
+    carrier: { type: String },
+    orig: { type: String },
+    dest: { type: String },
+    codigo_agente: { type: String },
+    nombre_agente: { type: String },
+    pieces: { type: Number },
+    weight: { type: Number },
+    gross_weight: { type: Number },
+    volume: { type: Number },
     rate: { type: Number },
-    flete: { type: Number, required: true },
-    subtotal: { type: Number, required: true },
-    iva: { type: Number, required: true },
+    flete: { type: Number },
+    subtotal: { type: Number },
+    iva: { type: Number },
     total: { type: Number },
     tipo_pago: { type: String },
-    descripcion: { type: String, required: true },
+    descripcion: { type: String },
     codigo_cliente: { type: String },
-    currency: { type: String, required: true },
+    currency: { type: String },
     price_class: { type: String },
     shc: { type: String },
-    fecha_creacion: { type: Date, required: true },
+    fecha_creacion: { type: Date },
     charge_code: { type: String },
-    create_oper: { type: String, required: true },
-  },
-  {
-    timestamps: true,
-  }
-);
+    create_oper: { type: String },
+  };
+
+const AwbReportDataSchema = new mongoose.Schema(awbReportDataSchemaDefinition, {
+  timestamps: true,
+});
 
 export const AwbReportData = mongoose.model<IAwbReportData>(
   "AwbReportData",
-  AwbReportDataSchema
+  AwbReportDataSchema,
 );
