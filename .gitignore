@@ -44,3 +44,7 @@ coverage/
 # --- Misc ---
 *.tmp
 *.temp
+
+# --- Scraper Downloads ---
+downloads/
+src/downloads/
