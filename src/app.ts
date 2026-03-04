@@ -4,6 +4,7 @@ import cors from "cors";
 const app: Application = express();
 
 app.set("port", process.env.PORT || 3000);
+app.set("etag", false);
 app.use(express.json());
 app.use(morgan("dev"));
 app.use(cors());
