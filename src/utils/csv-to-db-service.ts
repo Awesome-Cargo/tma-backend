@@ -4,12 +4,23 @@ import Exceljs from "exceljs";
 import { fileURLToPath } from "url";
 import { AwbReportData } from "../models/AwbReportData.js";
 import { FsuReportData } from "../models/FsuReportData.js";
+import fs from "fs";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
+function resolveCsvPath(fileName: string) {
+  const rawPath = path.resolve(__dirname, `../../downloads/${fileName}`);
+  if (fs.existsSync(rawPath)) return rawPath;
+
+  const csvPath = rawPath.endsWith(".csv") ? rawPath : `${rawPath}.csv`;
+  if (fs.existsSync(csvPath)) return csvPath;
+
+  throw new Error(`CSV file not found: ${fileName}`);
+}
+
 export const getAwbReportData = async ({ fileName }: { fileName: string }) => {
-  const filePath = path.resolve(__dirname, `../../downloads/${fileName}`);
+  const filePath = resolveCsvPath(fileName);
 
   const workbook = new Exceljs.Workbook();
   const worksheet = await workbook.csv.readFile(filePath);
@@ -31,7 +42,7 @@ export const getAwbReportData = async ({ fileName }: { fileName: string }) => {
 };
 
 export const getFsuReportData = async ({ fileName }: { fileName: string }) => {
-  const filePath = path.resolve(__dirname, `../../downloads/${fileName}`);
+  const filePath = resolveCsvPath(fileName);
 
   const workbook = new Exceljs.Workbook();
   const worksheet = await workbook.csv.readFile(filePath);

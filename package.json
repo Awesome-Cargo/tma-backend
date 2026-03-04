@@ -11,7 +11,8 @@
     "seed-awb": "clear && tsx watch src/scripts/get-report-data.script.ts",
     "seed-fsu": "clear && tsx watch src/scripts/get-fsu-data.script.ts",
     "scraper:start": "npx ts-node src/scraper/scraper.ts",
-    "scraper:test": "clear && npm run build && npx ts-node dist/scraper/getAllData.js"
+    "scraper:test": "npm run build && npx ts-node dist/scraper/getAllData.js",
+    "scraper:test-fsu": "npm run build && npx ts-node dist/scraper/getFsuData.js"
   },
   "keywords": [],
   "author": "",

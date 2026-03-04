@@ -11,6 +11,12 @@ export const getCellValue = (row: Row, cellindex: number) => {
 type IReportExcel = Omit<IAwbReportData, "_id">;
 type IFsuStatusExcel = Omit<IFsuReportData, "_id">;
 
+const parseDate = (value: string): Date | undefined => {
+  if (!value) return undefined;
+  const parsed = new Date(value);
+  return Number.isNaN(parsed.getTime()) ? undefined : parsed;
+};
+
 export const reportExcelDto = (rows: Row[]): IReportExcel[] => {
   return rows.map((row): IReportExcel => {
     return {
@@ -42,21 +48,36 @@ export const reportExcelDto = (rows: Row[]): IReportExcel[] => {
 };
 
 export const fsuStatusExcelDto = (rows: Row[]): IFsuStatusExcel[] => {
-  return rows.map((row): IFsuStatusExcel => {
-    let flight_date: any = getCellValue(row, 7);
-    if (flight_date) {
-      flight_date = new Date(flight_date);
+  const parsedRows: IFsuStatusExcel[] = [];
+
+  for (const row of rows) {
+    const time_stamp = parseDate(getCellValue(row, 3));
+    const flight_date = parseDate(getCellValue(row, 7));
+    const flight_number = getCellValue(row, 6);
+    if (!time_stamp) {
+      continue;
     }
-    return {
+
+    const baseRow: IFsuStatusExcel = {
       awb: getCellValue(row, 1).padStart(8, "0"),
       oper: getCellValue(row, 2),
-      time_stamp: new Date(getCellValue(row, 3)),
+      time_stamp,
       status: getCellValue(row, 4),
       issue_code: getCellValue(row, 5),
-      flight_number: getCellValue(row, 6),
-      flight_date,
       orig: getCellValue(row, 8),
       dest: getCellValue(row, 9),
     };
-  });
+
+    if (flight_number) {
+      baseRow.flight_number = flight_number;
+    }
+
+    if (flight_date) {
+      baseRow.flight_date = flight_date;
+    }
+
+    parsedRows.push(baseRow);
+  }
+
+  return parsedRows;
 };
